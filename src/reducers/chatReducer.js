@@ -1,13 +1,20 @@
 export default function chatReducer(state = {
     user: '',
-    room: ''
+    room: '',
+    socket: '',
 }, action) {
     switch (action.type) {
-        case 'CONNECT': {
+        case 'CONNECT_SOCKET': {
             state = {
                 ...state,
                 socket: action.payload
-            }
+            };
+            break;
+        }
+        default: {
+            // console.log('default'); todo: smt with default
+            break;
         }
     }
+    return state
 }
