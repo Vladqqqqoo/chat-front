@@ -1,6 +1,6 @@
-export function setUser(username) {
+export function logIn(user) {
     return {
-        type: 'SET_USERNAME',
-        payload: username
+        type: 'LOG_IN',
+        payload: user
     }
 }
