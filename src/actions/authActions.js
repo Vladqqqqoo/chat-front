@@ -4,3 +4,10 @@ export function logIn(user) {
         payload: user
     }
 }
+
+export function logOut() {
+    return {
+        type: 'LOG_OUT',
+        payload: false
+    }
+}

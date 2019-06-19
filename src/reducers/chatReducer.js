@@ -1,5 +1,5 @@
 export default function chatReducer(state = {
-    user: '',
+    username: '',
     room: '',
     socket: '',
 }, action) {
