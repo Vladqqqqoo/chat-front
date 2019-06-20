@@ -34,9 +34,11 @@ function App(props) {
                         path='/registration'
                         render={(routerProps) => <Registration {...routerProps} logIn={props.logIn} user={props.user}/>}
                     />
-                    <Route
+                    <ProtectedRoute
+                        user={props.user}
+                        exact
                         path='/chat/:id'
-                        render={(routerProps) => <Room {...routerProps}/>}
+                        component={Room}
                     />
                     <Route path='*' component={() => '404 NOT FOUND'}/>
                 </Switch>

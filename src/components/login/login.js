@@ -1,6 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import axios from 'axios';
 import {Redirect, Link} from 'react-router-dom';
+
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import './login.css'
 import useFormInput from '../../customHooks/useFormInput';
@@ -24,12 +27,18 @@ function Login(props) {
             .then((userAccess) => {
                 props.logIn(userAccess.data);
                 localStorageService.setTokens(userAccess.data);
-                props.history.push('/');
             })
             .catch(err => {
+                toast.error('Failed authorization. Please check login and password!');
                 console.log('Bad authorization ', err);
             });
     }
+
+    useEffect(()=>{
+        toast.configure({
+
+        })
+    },[]);
 
     return (
         props.user.isAuthorized
@@ -57,6 +66,17 @@ function Login(props) {
                                 <span>don't have an account?</span>
                             </Link>
                         </div>
+                        <ToastContainer
+                            position="top-right"
+                            autoClose={5000}
+                            hideProgressBar
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnVisibilityChange
+                            draggable
+                            pauseOnHover
+                        />
                     </Form>
                 </Col>
             </Row>
