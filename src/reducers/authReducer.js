@@ -19,9 +19,6 @@ export default function authReducer(
             };
             break;
         }
-        case 'SIGN_UP_FULFILLED': {
-            break;
-        }
         default: {
             //todo: smt with default case
             break;

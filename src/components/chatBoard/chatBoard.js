@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import {Link} from 'react-router-dom';
+
 
 import './chatBoard.css'
 
@@ -13,6 +15,19 @@ import AddIcon from '@material-ui/icons/Add';
 
 
 function ChatBoard(props) {
+
+    const [rooms, setRooms] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:3000/chat/list')
+            .then((roomsList) => {
+                setRooms(roomsList.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }, []);
+
     return (
         <Tab.Container id="list-group-tabs-example" defaultActiveKey="#link1">
             <Row>
@@ -24,18 +39,16 @@ function ChatBoard(props) {
                             </Fab>
                             <span className='newRoomSpan'>New room</span>
                         </ListGroup.Item>
-                        <ListGroup.Item action>
-                            <div>123</div>
-                            <div>123</div>
-                            <div>123</div>
-                            <div>123</div>
-                        </ListGroup.Item>
-                        <ListGroup.Item action>
-                            Link 2
-                        </ListGroup.Item>
-                        <ListGroup.Item action>
-                            Link 3
-                        </ListGroup.Item>
+                        {
+                            rooms.map((element) => {
+                                    return (
+                                        <ListGroup.Item as={Link} to={`/chat/${element._id}`} action>
+                                            <span>{element.name}</span>
+                                        </ListGroup.Item>
+                                    )
+                                }
+                            )
+                        }
                     </ListGroup>
                 </Col>
             </Row>
