@@ -42,8 +42,8 @@ function ChatBoard(props) {
                         {
                             rooms.map((element) => {
                                     return (
-                                        <ListGroup.Item as={Link} to={`/chat/${element._id}`} action>
-                                            <span>{element.name}</span>
+                                        <ListGroup.Item key={element._id} as={Link} to={`/chat/${element._id}`} action>
+                                            <span >{element.name}</span>
                                         </ListGroup.Item>
                                     )
                                 }

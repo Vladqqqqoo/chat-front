@@ -11,6 +11,7 @@ import Login from '../../components/login/login';
 import ChatBoard from '../../components/chatBoard/chatBoard';
 import {ProtectedRoute} from '../../components/protectedRoute/protectedRoute';
 import Registration from "../../components/regestration/registration";
+import Room from '../../components/room/room';
 
 
 function App(props) {
@@ -32,6 +33,10 @@ function App(props) {
                     <Route
                         path='/registration'
                         render={(routerProps) => <Registration {...routerProps} logIn={props.logIn} user={props.user}/>}
+                    />
+                    <Route
+                        path='/chat/:id'
+                        render={(routerProps) => <Room {...routerProps}/>}
                     />
                     <Route path='*' component={() => '404 NOT FOUND'}/>
                 </Switch>
