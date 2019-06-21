@@ -26,15 +26,41 @@ function ChatBoard(props) {
             .catch((error) => {
                 console.log(error);
             });
-    }, []);
-
-
-    useEffect(() => {
-        if(!props.chat.socketIsConnected){
+        if (!props.chat.socketIsConnected) {
             props.connectSocket();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    useEffect(() => {
+        if (props.chat.socket) {
+            props.chat.socket.emit('join guest room');
+
+            props.chat.socket.on('joined guest room', () => {
+                console.log('hi guest');
+            });
+            props.chat.socket.on('left guest room', () => {
+                props.chat.socket.off();
+                console.log('by guest');
+            });
+
+            return () => {
+                props.chat.socket.emit('leave guest room');
+            }
+        }
+    }, [props.chat.socket]);
+
+    useEffect(() => {
+        if (props.chat.socket) {
+            props.chat.socket.on('added new room', (newRoom) => {
+                addRoom(newRoom);
+            });
+        }
+    }, [rooms]);
+
+    function emitAddNewRoom(newRoom) {
+        props.chat.socket.emit('add new room', newRoom);
+    }
 
     function addRoom(dataRoom) {
         const newRooms = [...rooms, dataRoom];
@@ -61,7 +87,8 @@ function ChatBoard(props) {
                                 <AddIcon/>
                             </Fab>
                             <span className='newRoomSpan'>New room</span>
-                            <AddRoomModal onSave={addRoom} show={showStatus} onHide={handleCloseModal}/>
+                            <AddRoomModal onAddNewRoom={emitAddNewRoom} onSave={addRoom} show={showStatus}
+                                          onHide={handleCloseModal}/>
                         </ListGroup.Item>
                         {
                             rooms.map((element) => {

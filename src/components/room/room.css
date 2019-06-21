@@ -7,3 +7,18 @@ p{
     background-color:red;
     white-space: normal;
 }
+
+.sendArea{
+    display: flex;
+    flex-direction: row;
+}
+
+.formMessage {
+    flex: 1 0 70%;
+}
+
+.MuiButtonBase-root.MuiFab-root.sendButton.MuiFab-primary.MuiFab-sizeMedium {
+    margin-top: 9px;
+    margin-left: 10px;
+    outline: none;
+}

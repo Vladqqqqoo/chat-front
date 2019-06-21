@@ -29,7 +29,7 @@ function NavBar(props) {
                 </Nav>
                 <Nav>
                     {props.user.isAuthorized &&
-                    (<Nav.Link onClick={handleClickLogOut}>
+                    (<Nav.Link href='#' onClick={handleClickLogOut}>
                         Log Out
                     </Nav.Link>)
                     }
