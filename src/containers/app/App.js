@@ -12,12 +12,24 @@ import ChatBoard from '../../components/chatBoard/chatBoard';
 import {ProtectedRoute} from '../../components/protectedRoute/protectedRoute';
 import Registration from "../../components/regestration/registration";
 import Room from '../../components/room/room';
+import {ToastContainer} from "react-toastify";
 
 
 function App(props) {
     return (
         <Layout>
             <Router>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={4000}
+                    hideProgressBar
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnVisibilityChange
+                    draggable
+                    pauseOnHover
+                />
                 <NavBar/>
                 <Switch>
                     <Route

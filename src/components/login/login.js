@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import axios from 'axios';
 import {Redirect, Link} from 'react-router-dom';
 
-import {ToastContainer, toast} from 'react-toastify';
+import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import './login.css'
@@ -25,24 +25,20 @@ function Login(props) {
         event.preventDefault();
         axios.post('http://localhost:3000/login', {login: login.value, password: password.value})
             .then((userAccess) => {
-                props.logIn(userAccess.data);
                 localStorageService.setTokens(userAccess.data);
+                props.logIn(userAccess.data);
             })
-            .catch(err => {
+            .catch((error) => {
                 toast.error('Failed authorization. Please check login and password!');
-                console.log('Bad authorization ', err);
             });
     }
 
-    useEffect(()=>{
-        toast.configure({
-
-        })
-    },[]);
-
     return (
         props.user.isAuthorized
-            ? <Redirect to='/'/>
+            ? <Redirect to={{
+                pathname: '/',
+                state: {from: props.location}
+            }}/>
             : <Row className='login'>
                 <Col xs={{span: 10, offset: 1}} md={{span: 6, offset: 3}} lg={{span: 5, offset: 4}}
                      xl={{span: 4, offset: 4}}>
@@ -66,17 +62,6 @@ function Login(props) {
                                 <span>don't have an account?</span>
                             </Link>
                         </div>
-                        <ToastContainer
-                            position="top-right"
-                            autoClose={5000}
-                            hideProgressBar
-                            newestOnTop={false}
-                            closeOnClick
-                            rtl={false}
-                            pauseOnVisibilityChange
-                            draggable
-                            pauseOnHover
-                        />
                     </Form>
                 </Col>
             </Row>
