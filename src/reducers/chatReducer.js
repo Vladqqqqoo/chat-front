@@ -1,12 +1,15 @@
-export default function chatReducer(state = {
-    username: '',
+const initialState = {
     room: '',
-    socket: '',
-}, action) {
+    socket: null,
+    socketIsConnected: false
+};
+
+export default function chatReducer(state = initialState, action) {
     switch (action.type) {
         case 'CONNECT_SOCKET': {
             state = {
                 ...state,
+                socketIsConnected: true,
                 socket: action.payload
             };
             break;

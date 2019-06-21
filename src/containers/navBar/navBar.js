@@ -18,12 +18,12 @@ function NavBar(props) {
     }
 
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar collapseOnSelect bg="light" expand="lg">
             <Navbar.Brand>SayMeWhat</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link to='/' as={Link}>
+                    <Nav.Link href='#' to='/' as={Link}>
                         Chats
                     </Nav.Link>
                 </Nav>

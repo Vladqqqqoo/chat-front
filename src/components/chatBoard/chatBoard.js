@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-import {toast} from 'react-toastify';
 
 import './chatBoard.css'
 import AddRoomModal from './addRoomModal/addRoomModal';
@@ -18,7 +17,6 @@ import AddIcon from '@material-ui/icons/Add';
 function ChatBoard(props) {
 
     const [rooms, setRooms] = useState([]);
-    const fromState = props.location.state || {from: {pathname: 'others'}};
 
     useEffect(() => {
         axios.get('http://localhost:3000/chat/list')
@@ -28,17 +26,18 @@ function ChatBoard(props) {
             .catch((error) => {
                 console.log(error);
             });
-        console.log(fromState.from.pathname);
-        if(fromState.from.pathname==='/login' || fromState.from.pathname==='/registration'){
-            toast.info('You successfully authorized', {
-                autoClose: 2000
-            });
+    }, []);
+
+
+    useEffect(() => {
+        if(!props.chat.socketIsConnected){
+            props.connectSocket();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     function addRoom(dataRoom) {
-        console.log(dataRoom);
-        const newRooms = [...rooms,dataRoom];
+        const newRooms = [...rooms, dataRoom];
         setRooms(newRooms);
     }
 

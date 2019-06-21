@@ -12,6 +12,7 @@ import {Form, Row, Col, Button} from 'react-bootstrap';
 function Registration(props) {
     const loginReg = /^[a-zA-Z][a-zA-Z0-9-_.]{1,20}$/;
     const passwordReg = /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
+    // eslint-disable-next-line
     const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     const login = useFormInput(loginReg);

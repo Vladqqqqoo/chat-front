@@ -25,6 +25,9 @@ function Login(props) {
         event.preventDefault();
         axios.post('http://localhost:3000/login', {login: login.value, password: password.value})
             .then((userAccess) => {
+                toast.info('You successfully authorized', {
+                    autoClose: 2000
+                });
                 localStorageService.setTokens(userAccess.data);
                 props.logIn(userAccess.data);
             })

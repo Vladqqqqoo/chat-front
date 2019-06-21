@@ -1,6 +1,5 @@
 export default function authReducer(
     state = {username: '', isAuthorized: !!localStorage.getItem('ACCESS_TOKEN')}, action
-    // state = {username: '', isAuthorized: false, }, action
 ) {
     switch (action.type) {
         case 'LOG_IN': {
