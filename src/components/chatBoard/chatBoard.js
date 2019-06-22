@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 
@@ -18,6 +18,8 @@ function ChatBoard(props) {
 
     const [rooms, setRooms] = useState([]);
 
+    const socket = props.chat.socket;
+
     useEffect(() => {
         axios.get('http://localhost:3000/chat/list')
             .then((roomsList) => {
@@ -26,46 +28,35 @@ function ChatBoard(props) {
             .catch((error) => {
                 console.log(error);
             });
-        if (!props.chat.socketIsConnected) {
-            props.connectSocket();
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
-        if (props.chat.socket) {
-            props.chat.socket.emit('join guest room');
+        socket.emit('join guest room');
 
-            props.chat.socket.on('joined guest room', () => {
-                console.log('hi guest');
-            });
-            props.chat.socket.on('left guest room', () => {
-                props.chat.socket.off();
-                console.log('by guest');
-            });
-
-            return () => {
-                props.chat.socket.emit('leave guest room');
-            }
+        return () => {
+            socket.emit('leave guest room');
+            socket.off();
         }
-    }, [props.chat.socket]);
+    }, [socket]);
 
-    useEffect(() => {
-        if (props.chat.socket) {
-            props.chat.socket.on('added new room', (newRoom) => {
-                addRoom(newRoom);
-            });
-        }
-    }, [rooms]);
-
-    function emitAddNewRoom(newRoom) {
-        props.chat.socket.emit('add new room', newRoom);
-    }
-
-    function addRoom(dataRoom) {
+    const addRoom = useCallback((dataRoom) => {
         const newRooms = [...rooms, dataRoom];
         setRooms(newRooms);
+    }, [rooms]);
+
+    useEffect(() => {
+        socket.on('added new room', (newRoom) => {
+            addRoom(newRoom);
+        });
+        return () => {
+            socket.off('added new room');
+        }
+    }, [socket, addRoom]);
+
+    function emitAddNewRoom(newRoom) {
+        socket.emit('add new room', newRoom);
     }
+
 
     const [showStatus, setShowStatus] = useState(false);
 

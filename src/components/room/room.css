@@ -22,3 +22,27 @@ p{
     margin-left: 10px;
     outline: none;
 }
+
+.roomClass {
+    display: flex;
+    flex-direction: column;
+    height: 91vh;
+}
+
+.messageClass{
+    flex: 1 0 auto;
+}
+
+.sendingClass {
+    flex: 0 0 auto;
+}
+
+.myMessage{
+    margin: 10px 0 10px 0;
+}
+
+.othersMessage {
+    margin: 10px 0 10px 0;
+}
+
+/*<div style="overflow-y: scroll; height:400px;">*/

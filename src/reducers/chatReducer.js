@@ -1,6 +1,8 @@
+import * as io from "socket.io-client";
+
 const initialState = {
     room: '',
-    socket: null,
+    socket: io('http://localhost:3000'),
     socketIsConnected: false
 };
 
