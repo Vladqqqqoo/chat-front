@@ -23,10 +23,11 @@ function Registration(props) {
         event.preventDefault();
         axios.post('http://localhost:3000/signup', {login: login.value, password: password.value, email: email.value})
             .then((userAccess) => {
-                console.log(userAccess);
                 props.logIn(userAccess.data);
                 localStorageService.setTokens(userAccess.data);
-                props.history.push('/');
+                toast.success('You successfully registered', {
+                    autoClose: 2000
+                });
             })
             .catch((error) => {
                 toast.error('Failed registration. User with this email or login already exist')
