@@ -5,3 +5,23 @@
 .MuiButtonBase-root.MuiFab-root.MuiFab-primary.MuiFab-sizeSmall {
     outline: none;
 }
+
+.MuiButtonBase-root.MuiIconButton-root.deleteButton {
+    /*visibility: hidden;*/
+    outline: none;
+}
+
+.list-group-item.list-group-item-action:hover .MuiButtonBase-root.MuiIconButton-root.deleteButton {
+    visibility: visible;
+    outline: none;
+}
+
+/*.list-group-item {*/
+/*    padding: 0 15px 0 0;*/
+/*}*/
+
+.roomElement {
+    width: 100%;
+    align-items: center;
+    min-height: 73px;
+}

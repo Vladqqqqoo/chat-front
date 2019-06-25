@@ -4,12 +4,13 @@ import axios from 'axios';
 import Modal from 'react-bootstrap/Modal'
 import {Alert, Button, Form} from 'react-bootstrap';
 
+
 function AddRoomModal(props) {
 
     const [roomName, setRoomName] = useState('');
 
     function saveRoom() {
-        axios.post('http://localhost:3000/chat', {name: roomName})
+        axios.post('http://localhost:3000/chat', {name: roomName, createdBy: props.createdBy})
             .then((createdRoom)=>{
                 props.onSave(createdRoom.data);
                 props.onAddNewRoom(createdRoom.data);
