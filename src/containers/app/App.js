@@ -14,12 +14,14 @@ import {ProtectedRoute} from '../../components/protectedRoute/protectedRoute';
 import Registration from "../../components/regestration/registration";
 import Room from '../../components/room/room';
 import {ToastContainer} from "react-toastify";
-
+import CallAxios from '../../authInterceptor/authInterceptor';
 
 function App(props) {
+    // axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('ACCESS_TOKEN');
     return (
         <Layout>
             <Router>
+                <CallAxios/>
                 <ToastContainer
                     position="top-right"
                     autoClose={4000}
@@ -59,7 +61,6 @@ function App(props) {
         </Layout>
     );
 }
-
 
 const mapStateToProps = (state) => {
     return {

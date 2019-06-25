@@ -18,5 +18,13 @@ export default class LocalStorageService {
         localStorage.removeItem(userId);
         localStorage.removeItem(userName);
     }
+
+    static getAccessToken(){
+        return localStorage.getItem(accessToken);
+    }
+
+    static getRefreshToken(){
+        return localStorage.getItem(refreshToken);
+    }
 }
 

@@ -30,7 +30,8 @@ p{
 }
 
 .messageClass{
-    flex: 1 0 auto;
+    height: 90%;
+    overflow-y: scroll;
 }
 
 .sendingClass {
@@ -45,4 +46,13 @@ p{
     margin: 10px 0 10px 0;
 }
 
+.messageEnd {
+    bottom: 0;
+}
+
 /*<div style="overflow-y: scroll; height:400px;">*/
+
+::-webkit-scrollbar {
+    display: none;
+    -ms-overflow-style: none;
+}

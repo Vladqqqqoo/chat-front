@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import Textarea from 'react-textarea-autosize';
 
 import './room.css';
@@ -17,6 +17,8 @@ function Room(props) {
     const roomId = props.match.params.id;
     const userId = props.user.userId;
     const userName = props.user.userName;
+    const messagesEndRef = useRef(null);
+
 
     useEffect(() => {
         socket.emit('join room', {roomId});
@@ -32,11 +34,16 @@ function Room(props) {
             console.log('new message received ', message);
             setMessages([...messages, message]);
             setInputText('');
+            scrollToBottom();
         });
         return () => {
             socket.off('new message received');
         }
     }, [socket, messages]);
+
+    const scrollToBottom = () => {
+        messagesEndRef.current.scrollIntoView({behavior: "smooth"})
+    };
 
     function sendMessage() {
         console.log('send');
@@ -88,6 +95,12 @@ function Room(props) {
             <Row className='messageClass'>
                 <Col md={{span: 10, offset: 1}}>
                     {messagesList}
+                </Col>
+                <Col md={{span: 10}}>
+                    <div
+                        className="messageEnd"
+                        ref={messagesEndRef}>
+                    </div>
                 </Col>
             </Row>
             <Row>
