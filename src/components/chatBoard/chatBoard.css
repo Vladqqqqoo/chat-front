@@ -2,10 +2,9 @@
     margin-left: 10px;
 }
 
-.MuiButtonBase-root.MuiIconButton-root.deleteButton {
+.MuiButtonBase-root.MuiFab-root.MuiFab-primary.MuiFab-sizeSmall {
     outline: none;
 }
-
 
 .roomElement {
     display: flex;
@@ -14,5 +13,4 @@
     align-items: center;
     flex-wrap: nowrap;
     min-height: 73px;
-
 }

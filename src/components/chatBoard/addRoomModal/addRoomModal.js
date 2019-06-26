@@ -12,7 +12,6 @@ function AddRoomModal(props) {
     function saveRoom() {
         axios.post('http://localhost:3000/chat', {name: roomName, createdBy: props.createdBy})
             .then((createdRoom)=>{
-                props.onSave(createdRoom.data);
                 props.onAddNewRoom(createdRoom.data);
                 props.onHide();
             })

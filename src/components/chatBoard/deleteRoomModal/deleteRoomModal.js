@@ -8,14 +8,14 @@ import {Button} from 'react-bootstrap';
 function DeleteRoomModal(props) {
 
     function deleteRoom() {
-        // axios.delete('http://localhost:3000/chat', {})
-        //     .then((createdRoom)=>{
-        //         props.onAddNewRoom(createdRoom.data);
-        //         props.onHide();
-        //     })
-        //     .catch((error)=>{
-        //         console.log(error.response);
-        //     });
+        axios.delete(`http://localhost:3000/chat/${props.room.roomId}`)
+            .then((info)=>{
+                props.onDeleteRoom(props.room.roomId);
+                props.onHide();
+            })
+            .catch((error)=>{
+                console.log(error.response);
+            });
     }
 
 
@@ -23,7 +23,7 @@ function DeleteRoomModal(props) {
         <Modal show={props.show} onHide={props.onHide} aria-labelledby="contained-modal-title-vcenter">
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Delete <u>{props.roomName}</u> room
+                    Delete <u>{props.room.roomName}</u> room
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>

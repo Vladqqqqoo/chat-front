@@ -58,10 +58,33 @@ function ChatBoard(props) {
         socket.emit('add new room', newRoom);
     }
 
+    const deleteRoom = useCallback((roomId) => {
+        const newRooms = [...rooms];
+        const deletedRoom = newRooms.findIndex((element) => {
+            return element._id === roomId
+        });
+        newRooms.splice(deletedRoom, 1);
+        setRooms(newRooms);
+
+    }, [rooms]);
+
+    useEffect(() => {
+        socket.on('deleted room', (roomId) => {
+            deleteRoom(roomId);
+        });
+        return () => {
+            socket.off('deleted room');
+        }
+    }, [socket, deleteRoom]);
+
+    function emitDeleteRoom(roomId) {
+        socket.emit('delete room', roomId);
+    }
+
 
     const [showAddRoomModal, setShowAddRoomModal] = useState(false);
     const [showDeleteRoomModal, setShowDeleteRoomModal] = useState(false);
-    const [deletedRoom, setDeletedRoom] = useState('');
+    const [deletedRoom, setDeletedRoom] = useState({roomId: '', roomName: ''});
 
     function handleShowAddRoomModal() {
         setShowAddRoomModal(true);
@@ -72,9 +95,9 @@ function ChatBoard(props) {
     }
 
 
-    function handleShowDeleteRoomModal(event, roomName) {
+    function handleShowDeleteRoomModal(event, roomId, roomName) {
         event.preventDefault();
-        setDeletedRoom(roomName);
+        setDeletedRoom({roomId, roomName});
         setShowDeleteRoomModal(true);
     }
 
@@ -87,13 +110,13 @@ function ChatBoard(props) {
             <ListGroup sm={{span: 6, offset: 3}} md={{span: 8, offset: 2}} as={Col} variant="flush">
                 <AddRoomModal
                     onAddNewRoom={emitAddNewRoom}
-                    onSave={addRoom}
                     createdBy={props.user.userId}
                     show={showAddRoomModal}
                     onHide={handleCloseAddRoomModal}
                 />
                 <DeleteRoomModal
-                    roomName={deletedRoom}
+                    onDeleteRoom={emitDeleteRoom}
+                    room={deletedRoom}
                     show={showDeleteRoomModal}
                     onHide={handleCloseDeleteRoomModal}
                 />
@@ -122,7 +145,7 @@ function ChatBoard(props) {
                                         &&
                                         (<IconButton className="deleteButton"
                                                      onClick={(event) => {
-                                                         return handleShowDeleteRoomModal(event, element.name)
+                                                         return handleShowDeleteRoomModal(event, element._id, element.name)
                                                      }}>
                                             <DeleteIcon/>
                                         </IconButton>)
