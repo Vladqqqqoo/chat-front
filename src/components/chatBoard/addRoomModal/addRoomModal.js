@@ -39,7 +39,7 @@ function AddRoomModal(props) {
         <Modal show={props.show} onHide={props.onHide} onExit={handleDismiss} aria-labelledby="contained-modal-title-vcenter">
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Add New Room
+                    Add new room
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>

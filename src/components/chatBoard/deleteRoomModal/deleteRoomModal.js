@@ -18,11 +18,12 @@ function DeleteRoomModal(props) {
         //     });
     }
 
+
     return (
         <Modal show={props.show} onHide={props.onHide} aria-labelledby="contained-modal-title-vcenter">
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Delete some Room
+                    Delete <u>{props.roomName}</u> room
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>

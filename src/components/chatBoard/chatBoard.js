@@ -6,7 +6,6 @@ import './chatBoard.css'
 import AddRoomModal from './addRoomModal/addRoomModal';
 import DeleteRoomModal from './deleteRoomModal/deleteRoomModal';
 
-import Tab from 'react-bootstrap/Tab';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
 import ListGroup from 'react-bootstrap/ListGroup'
@@ -62,6 +61,7 @@ function ChatBoard(props) {
 
     const [showAddRoomModal, setShowAddRoomModal] = useState(false);
     const [showDeleteRoomModal, setShowDeleteRoomModal] = useState(false);
+    const [deletedRoom, setDeletedRoom] = useState('');
 
     function handleShowAddRoomModal() {
         setShowAddRoomModal(true);
@@ -72,7 +72,9 @@ function ChatBoard(props) {
     }
 
 
-    function handleShowDeleteRoomModal() {
+    function handleShowDeleteRoomModal(event, roomName) {
+        event.preventDefault();
+        setDeletedRoom(roomName);
         setShowDeleteRoomModal(true);
     }
 
@@ -81,57 +83,57 @@ function ChatBoard(props) {
     }
 
     return (
-        <Tab.Container id="list-group-tabs-example" defaultActiveKey="#link1">
-            <Row>
-                <Col sm={{span: 6, offset: 3}} md={{span: 8, offset: 2}}>
-                    <ListGroup variant="flush">
-                        <ListGroup.Item>
-                            <Fab onClick={handleShowAddRoomModal} size="small" color="primary" aria-label="Add">
-                                <AddIcon/>
-                            </Fab>
-                            <span className='newRoomSpan'>New room</span>
-                            <AddRoomModal
-                                onAddNewRoom={emitAddNewRoom}
-                                onSave={addRoom}
-                                createdBy={props.user.userId}
-                                show={showAddRoomModal}
-                                onHide={handleCloseAddRoomModal}
-                            />
-                        </ListGroup.Item>
-                        <DeleteRoomModal
-                            show={showDeleteRoomModal}
-                            onHide={handleCloseDeleteRoomModal}
-                        />
-                        {
-                            rooms.map((element) => {
-                                    return (
-                                        <ListGroup.Item key={element._id} as="div" action>
-                                            <Row className="roomElement">
-                                                <Col md={10}>
-                                                    <Row as={Link} to={`/chat/${element._id}`}>
-                                                        {element.name}
-                                                    </Row>
-                                                </Col>
-                                                <Col md={2}>
-                                                    {
-                                                        element.createdBy === props.user.userId
-                                                        &&
-                                                        (<IconButton className="deleteButton"
-                                                                     onClick={handleShowDeleteRoomModal}>
-                                                            <DeleteIcon/>
-                                                        </IconButton>)
-                                                    }
-                                                </Col>
-                                            </Row>
-                                        </ListGroup.Item>
-                                    )
-                                }
-                            ).reverse()
+        <Row>
+            <ListGroup sm={{span: 6, offset: 3}} md={{span: 8, offset: 2}} as={Col} variant="flush">
+                <AddRoomModal
+                    onAddNewRoom={emitAddNewRoom}
+                    onSave={addRoom}
+                    createdBy={props.user.userId}
+                    show={showAddRoomModal}
+                    onHide={handleCloseAddRoomModal}
+                />
+                <DeleteRoomModal
+                    roomName={deletedRoom}
+                    show={showDeleteRoomModal}
+                    onHide={handleCloseDeleteRoomModal}
+                />
+                <ListGroup.Item>
+                    <Fab onClick={handleShowAddRoomModal} size="small" color="primary" aria-label="Add">
+                        <AddIcon/>
+                    </Fab>
+                    <span className='newRoomSpan'>New room</span>
+                </ListGroup.Item>
+                {
+                    rooms.map((element) => {
+                            return (
+                                <ListGroup.Item
+                                    className="roomElement"
+                                    key={element._id}
+                                    as={Link}
+                                    to={{
+                                        pathname: `/chat/${element._id}`,
+                                        state: {
+                                            name: element.name
+                                        }
+                                    }} action>
+                                    <span>{element.name}</span>
+                                    {
+                                        element.createdBy === props.user.userId
+                                        &&
+                                        (<IconButton className="deleteButton"
+                                                     onClick={(event) => {
+                                                         return handleShowDeleteRoomModal(event, element.name)
+                                                     }}>
+                                            <DeleteIcon/>
+                                        </IconButton>)
+                                    }
+                                </ListGroup.Item>
+                            )
                         }
-                    </ListGroup>
-                </Col>
-            </Row>
-        </Tab.Container>
+                    ).reverse()
+                }
+            </ListGroup>
+        </Row>
     )
 }
 

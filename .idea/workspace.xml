@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4f14005b-a141-4490-b58f-b2398e58c3f4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/chatBoard/deleteRoomModal/deleteRoomModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/chatBoard/addRoomModal/addRoomModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/chatBoard/addRoomModal/addRoomModal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/chatBoard/chatBoard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/chatBoard/chatBoard.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/chatBoard/chatBoard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/chatBoard/chatBoard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/chatBoard/deleteRoomModal/deleteRoomModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/chatBoard/deleteRoomModal/deleteRoomModal.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -55,8 +53,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/chatBoard/chatBoard.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+            <state relative-caret-position="252">
+              <caret line="9" column="14" lean-forward="true" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -64,8 +62,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/chatBoard/chatBoard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="110" column="88" lean-forward="true" selection-start-line="110" selection-start-column="88" selection-end-line="110" selection-end-column="88" />
+            <state relative-caret-position="-647">
+              <caret line="85" column="13" lean-forward="true" selection-start-line="85" selection-start-column="13" selection-end-line="85" selection-end-column="13" />
               <folding>
                 <element signature="e#0#62#0" expanded="true" />
                 <element signature="n#!!block;n#emitAddNewRoom#0;n#!!block;n#ChatBoard#0" />
@@ -77,8 +75,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/chatBoard/deleteRoomModal/deleteRoomModal.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="28" column="46" selection-start-line="28" selection-start-column="46" selection-end-line="28" selection-end-column="46" />
+            <state relative-caret-position="308">
+              <caret line="32" column="68" selection-start-line="32" selection-start-column="68" selection-end-line="32" selection-end-column="68" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -186,9 +184,9 @@
         <option value="$PROJECT_DIR$/src/authInterceptor/authInterceptor.js" />
         <option value="$PROJECT_DIR$/src/containers/app/App.js" />
         <option value="$PROJECT_DIR$/src/components/chatBoard/addRoomModal/addRoomModal.js" />
-        <option value="$PROJECT_DIR$/src/components/chatBoard/deleteRoomModal/deleteRoomModal.js" />
         <option value="$PROJECT_DIR$/src/components/chatBoard/chatBoard.css" />
         <option value="$PROJECT_DIR$/src/components/chatBoard/chatBoard.js" />
+        <option value="$PROJECT_DIR$/src/components/chatBoard/deleteRoomModal/deleteRoomModal.js" />
       </list>
     </option>
   </component>
@@ -387,11 +385,12 @@
       <workItem from="1561146393335" duration="6876000" />
       <workItem from="1561188199343" duration="24960000" />
       <workItem from="1561472123849" duration="1083000" />
+      <workItem from="1561538093547" duration="3360000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="151867000" />
+    <option name="totallyTimeSpent" value="155227000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -674,15 +673,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/chatBoard/chatBoard.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+        <state relative-caret-position="252">
+          <caret line="9" column="14" lean-forward="true" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/chatBoard/deleteRoomModal/deleteRoomModal.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="28" column="46" selection-start-line="28" selection-start-column="46" selection-end-line="28" selection-end-column="46" />
+        <state relative-caret-position="308">
+          <caret line="32" column="68" selection-start-line="32" selection-start-column="68" selection-end-line="32" selection-end-column="68" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
@@ -691,8 +690,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/chatBoard/chatBoard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="110" column="88" lean-forward="true" selection-start-line="110" selection-start-column="88" selection-end-line="110" selection-end-column="88" />
+        <state relative-caret-position="-647">
+          <caret line="85" column="13" lean-forward="true" selection-start-line="85" selection-start-column="13" selection-end-line="85" selection-end-column="13" />
           <folding>
             <element signature="e#0#62#0" expanded="true" />
             <element signature="n#!!block;n#emitAddNewRoom#0;n#!!block;n#ChatBoard#0" />
