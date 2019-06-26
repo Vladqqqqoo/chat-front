@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import {logIn} from "../../actions/authActions";
 import {connectSocket} from '../../actions/chatActions';
+import userSelector from '../../selectors/userSelector';
 
 import NavBar from '../navBar/navBar';
 import Layout from '../../components/layout/layout';
@@ -16,8 +17,8 @@ import Room from '../../components/room/room';
 import {ToastContainer} from "react-toastify";
 import CallAxios from '../../authInterceptor/authInterceptor';
 
+
 function App(props) {
-    // axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('ACCESS_TOKEN');
     return (
         <Layout>
             <Router>
@@ -64,7 +65,7 @@ function App(props) {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user,
+        user: userSelector.getUser(state),
         chat: state.chat
     }
 };

@@ -5,7 +5,6 @@ const userName='USER_NAME';
 
 export default class LocalStorageService {
     static setTokens(tokens) {
-        console.log(tokens);
         localStorage.setItem(accessToken, tokens.jwt);
         localStorage.setItem(refreshToken, tokens.refreshToken);
         localStorage.setItem(userId, tokens.userId);
