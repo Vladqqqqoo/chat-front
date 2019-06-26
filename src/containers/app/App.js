@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import {logIn} from "../../actions/authActions";
+import {connectSocket} from '../../actions/chatActions';
 
 import NavBar from '../navBar/navBar';
 import Layout from '../../components/layout/layout';
@@ -11,12 +12,27 @@ import Login from '../../components/login/login';
 import ChatBoard from '../../components/chatBoard/chatBoard';
 import {ProtectedRoute} from '../../components/protectedRoute/protectedRoute';
 import Registration from "../../components/regestration/registration";
-
+import Room from '../../components/room/room';
+import {ToastContainer} from "react-toastify";
+import CallAxios from '../../authInterceptor/authInterceptor';
 
 function App(props) {
+    // axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('ACCESS_TOKEN');
     return (
         <Layout>
             <Router>
+                <CallAxios/>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={4000}
+                    hideProgressBar
+                    newestOnTop
+                    closeOnClick
+                    rtl={false}
+                    pauseOnVisibilityChange
+                    draggable
+                    pauseOnHover
+                />
                 <NavBar/>
                 <Switch>
                     <Route
@@ -24,7 +40,7 @@ function App(props) {
                         render={(routerProps) => <Login {...routerProps} logIn={props.logIn} user={props.user}/>}
                     />
                     <ProtectedRoute
-                        user={props.user}
+                        reduxProps={props}
                         exact
                         path='/'
                         component={ChatBoard}
@@ -33,6 +49,12 @@ function App(props) {
                         path='/registration'
                         render={(routerProps) => <Registration {...routerProps} logIn={props.logIn} user={props.user}/>}
                     />
+                    <ProtectedRoute
+                        reduxProps={props}
+                        exact
+                        path='/chat/:id'
+                        component={Room}
+                    />
                     <Route path='*' component={() => '404 NOT FOUND'}/>
                 </Switch>
             </Router>
@@ -40,10 +62,10 @@ function App(props) {
     );
 }
 
-
 const mapStateToProps = (state) => {
     return {
-        user: state.user
+        user: state.user,
+        chat: state.chat
     }
 };
 
@@ -51,6 +73,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         logIn: (user) => {
             dispatch(logIn(user))
+        },
+        connectSocket: () => {
+            dispatch(connectSocket())
         }
     }
 };

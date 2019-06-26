@@ -2,6 +2,17 @@
     margin-left: 10px;
 }
 
-.MuiButtonBase-root.MuiFab-root.MuiFab-primary.MuiFab-sizeSmall {
+.MuiButtonBase-root.MuiIconButton-root.deleteButton {
     outline: none;
+}
+
+
+.roomElement {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    min-height: 73px;
+
 }

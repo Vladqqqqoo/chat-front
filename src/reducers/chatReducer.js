@@ -1,12 +1,17 @@
-export default function chatReducer(state = {
-    username: '',
+import * as io from "socket.io-client";
+
+const initialState = {
     room: '',
-    socket: '',
-}, action) {
+    socket: io('http://localhost:3000'),
+    socketIsConnected: false
+};
+
+export default function chatReducer(state = initialState, action) {
     switch (action.type) {
         case 'CONNECT_SOCKET': {
             state = {
                 ...state,
+                socketIsConnected: true,
                 socket: action.payload
             };
             break;

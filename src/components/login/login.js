@@ -2,6 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import {Redirect, Link} from 'react-router-dom';
 
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import './login.css'
 import useFormInput from '../../customHooks/useFormInput';
 import localStorageService from '../../services/localStorageService';
@@ -22,18 +25,23 @@ function Login(props) {
         event.preventDefault();
         axios.post('http://localhost:3000/login', {login: login.value, password: password.value})
             .then((userAccess) => {
-                props.logIn(userAccess.data);
+                toast.info('You successfully authorized', {
+                    autoClose: 2000
+                });
                 localStorageService.setTokens(userAccess.data);
-                props.history.push('/');
+                props.logIn(userAccess.data);
             })
-            .catch(err => {
-                console.log('Bad authorization ', err);
+            .catch((error) => {
+                toast.error('Failed authorization. Please check login and password!');
             });
     }
 
     return (
         props.user.isAuthorized
-            ? <Redirect to='/'/>
+            ? <Redirect to={{
+                pathname: '/',
+                state: {from: props.location}
+            }}/>
             : <Row className='login'>
                 <Col xs={{span: 10, offset: 1}} md={{span: 6, offset: 3}} lg={{span: 5, offset: 4}}
                      xl={{span: 4, offset: 4}}>

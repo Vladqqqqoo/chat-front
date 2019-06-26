@@ -1,0 +1,58 @@
+div{
+    position: relative;
+}
+
+p{
+    position: relative;
+    background-color:red;
+    white-space: normal;
+}
+
+.sendArea{
+    display: flex;
+    flex-direction: row;
+}
+
+.formMessage {
+    flex: 1 0 70%;
+}
+
+.MuiButtonBase-root.MuiFab-root.sendButton.MuiFab-primary.MuiFab-sizeMedium {
+    margin-top: 9px;
+    margin-left: 10px;
+    outline: none;
+}
+
+.roomClass {
+    display: flex;
+    flex-direction: column;
+    height: 91vh;
+}
+
+.messageClass{
+    height: 90%;
+    overflow-y: scroll;
+}
+
+.sendingClass {
+    flex: 0 0 auto;
+}
+
+.myMessage{
+    margin: 10px 0 10px 0;
+}
+
+.othersMessage {
+    margin: 10px 0 10px 0;
+}
+
+.messageEnd {
+    bottom: 0;
+}
+
+/*<div style="overflow-y: scroll; height:400px;">*/
+
+::-webkit-scrollbar {
+    display: none;
+    -ms-overflow-style: none;
+}

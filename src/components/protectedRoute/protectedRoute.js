@@ -5,8 +5,8 @@ export const ProtectedRoute = ({component: Component, ...rest}) => {
     return (
         <Route {...rest} render={
             (props) => {
-                if (rest.user.isAuthorized) {
-                    return <Component {...props} user={rest.user}/>
+                if (rest.reduxProps.user.isAuthorized) {
+                    return <Component {...props} {...rest.reduxProps}/>
                 } else {
                     return <Redirect to='/login'/>
                 }

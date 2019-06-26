@@ -1,19 +1,18 @@
 import React from 'react';
 import axios from 'axios';
 import {Redirect, Link} from 'react-router-dom';
+import {toast} from 'react-toastify';
 
 import './registration.css'
 import useFormInput from '../../customHooks/useFormInput';
 import localStorageService from '../../services/localStorageService';
 
-import Form from 'react-bootstrap/Form';
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from 'react-bootstrap/Button'
+import {Form, Row, Col, Button} from 'react-bootstrap';
 
 function Registration(props) {
     const loginReg = /^[a-zA-Z][a-zA-Z0-9-_.]{1,20}$/;
     const passwordReg = /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
+    // eslint-disable-next-line
     const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     const login = useFormInput(loginReg);
@@ -24,19 +23,23 @@ function Registration(props) {
         event.preventDefault();
         axios.post('http://localhost:3000/signup', {login: login.value, password: password.value, email: email.value})
             .then((userAccess) => {
-                console.log(userAccess);
                 props.logIn(userAccess.data);
                 localStorageService.setTokens(userAccess.data);
-                props.history.push('/');
+                toast.success('You successfully registered', {
+                    autoClose: 2000
+                });
             })
-            .catch(err => {
-                console.log('Bad registration ', err);
+            .catch((error) => {
+                toast.error('Failed registration. User with this email or login already exist')
             });
     }
 
     return (
         props.user.isAuthorized
-            ? <Redirect to='/'/>
+            ? <Redirect to={{
+                pathname: '/',
+                state: {from: props.location}
+            }}/>
             : <Row className='registration'>
                 <Col xs={{span: 10, offset: 1}} md={{span: 6, offset: 3}} lg={{span: 5, offset: 4}}
                      xl={{span: 4, offset: 4}}>

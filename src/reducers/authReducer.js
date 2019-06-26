@@ -1,12 +1,18 @@
+const initialState = {
+    userId: localStorage.getItem('USER_ID'),
+    userName: localStorage.getItem('USER_NAME'),
+    isAuthorized: !!localStorage.getItem('ACCESS_TOKEN')
+};
+
 export default function authReducer(
-    state = {username: '', isAuthorized: !!localStorage.getItem('ACCESS_TOKEN')}, action
-    // state = {username: '', isAuthorized: false, }, action
+    state = initialState, action
 ) {
     switch (action.type) {
         case 'LOG_IN': {
             state = {
                 ...state,
-                username: action.payload.userId,
+                userName: action.payload.userName,
+                userId: action.payload.userId,
                 isAuthorized: true
             };
             break;
@@ -14,12 +20,10 @@ export default function authReducer(
         case 'LOG_OUT': {
             state = {
                 ...state,
-                username: '',
+                userId: '',
+                userName: '',
                 isAuthorized: action.payload
             };
-            break;
-        }
-        case 'SIGN_UP_FULFILLED': {
             break;
         }
         default: {
