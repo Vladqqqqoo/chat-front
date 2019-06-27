@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import axios from 'axios';
+import axios from 'axios/index';
 
 import Modal from 'react-bootstrap/Modal'
 import {Alert, Button, Form} from 'react-bootstrap';

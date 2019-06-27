@@ -6,6 +6,10 @@
     outline: none;
 }
 
+.MuiButtonBase-root.MuiIconButton-root.deleteButton {
+    outline: none;
+}
+
 .roomElement {
     display: flex;
     width: 100%;

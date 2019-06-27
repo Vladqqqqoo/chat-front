@@ -1,11 +1,10 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import {connect} from "react-redux";
+
 
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
-import {logOut} from '../../actions/authActions';
 import localStorageService from '../../services/localStorageService';
 
 import './navBar.css'
@@ -39,18 +38,4 @@ function NavBar(props) {
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        user: state.user
-    }
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        logOut: () => {
-            dispatch(logOut())
-        }
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
+export default NavBar;

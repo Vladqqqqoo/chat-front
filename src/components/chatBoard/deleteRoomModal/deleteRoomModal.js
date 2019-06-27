@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import axios from 'axios';
+import React from 'react';
+import axios from 'axios/index';
 
 import Modal from 'react-bootstrap/Modal'
 import {Button} from 'react-bootstrap';

@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import axios from 'axios';
+import axios from 'axios/index';
 import {Link} from 'react-router-dom';
 
 import './chatBoard.css'

@@ -3,11 +3,11 @@ import './App.css';
 import {connect} from "react-redux";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
-import {logIn} from "../../actions/authActions";
-import {connectSocket} from '../../actions/chatActions';
+import {logIn, logOut} from "../../actions/authActions";
 import userSelector from '../../selectors/userSelector';
+import chatSelector from '../../selectors/chatSelector';
 
-import NavBar from '../navBar/navBar';
+import NavBar from '../../components/navBar/navBar';
 import Layout from '../../components/layout/layout';
 import Login from '../../components/login/login';
 import ChatBoard from '../../components/chatBoard/chatBoard';
@@ -34,7 +34,7 @@ function App(props) {
                     draggable
                     pauseOnHover
                 />
-                <NavBar/>
+                <NavBar user={props.user} logOut={props.logOut}/>
                 <Switch>
                     <Route
                         path='/login'
@@ -66,7 +66,7 @@ function App(props) {
 const mapStateToProps = (state) => {
     return {
         user: userSelector.getUser(state),
-        chat: state.chat
+        chat: chatSelector.getChat(state)
     }
 };
 
@@ -75,8 +75,8 @@ const mapDispatchToProps = (dispatch) => {
         logIn: (user) => {
             dispatch(logIn(user))
         },
-        connectSocket: () => {
-            dispatch(connectSocket())
+        logOut: () => {
+            dispatch(logOut())
         }
     }
 };
